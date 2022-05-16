@@ -2,30 +2,31 @@ FROM rocker/shiny:4.1
 
 LABEL maintainer="Sen ZHAO <t.cytotoxic@gmail.com>"
 
-RUN apt-get update && apt-get install -y \
-	build-essential \
-	sudo \
-	unzip \
-	wget \
-	curl \
-	git \
-	libbz2-dev \
-	zlib1g-dev \
-	libgsl0-dev \
-	liblzma-dev \
-	libglpk-dev \
-	libncurses5-dev \
-	libperl-dev \
-	zlib1g-dev \
-	libcurl4-openssl-dev \
-	libxt-dev \
-	libcairo2-dev \
-	libsqlite3-dev \
-	libpng-dev \
-	libjpeg-dev \
-	libxml2-dev \
-	libssl-dev \
-	libssh2-1-dev \
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends \
+	build-essential=12.8ubuntu1.1 \
+	sudo=1.8.31-1ubuntu1.2 \
+	unzip=6.0-25ubuntu1 \
+	wget=1.20.3-1ubuntu2 \
+	curl=7.68.0-1ubuntu2.11 \
+	git=1:2.25.1-1ubuntu3.4 \
+	libbz2-dev=1.0.8-2 \
+	zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.3 \
+	libgsl-dev=2.5+dfsg-6build1 \
+	liblzma-dev=5.2.4-1ubuntu1.1 \
+	libglpk-dev=4.65-2 \
+	libncurses5-dev=6.2-0ubuntu2 \
+	libperl-dev=5.30.0-9ubuntu0.2 \
+	zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.3 \
+	libcurl4-openssl-dev=7.68.0-1ubuntu2.11 \
+	libxt-dev=1:1.1.5-1 \
+	libcairo2-dev=1.16.0-4ubuntu1 \
+	libsqlite3-dev=3.31.1-4ubuntu0.3 \
+	libpng-dev=1.6.37-2 \
+	libjpeg-dev=8c-2ubuntu8 \
+	libxml2-dev=2.9.10+dfsg-5ubuntu0.20.04.2 \
+	libssl-dev=1.1.1f-1ubuntu2.13 \
+	libssh2-1-dev=1.8.0-2.1build1 \
     && rm -rf /var/lib/apt/lists/*
 
 ENV LIBRARY_PATH=$LIBRARY_PATH:/usr/local/lib/R/lib/
@@ -64,7 +65,7 @@ RUN addgroup --system senzhao && adduser --system --ingroup senzhao senzhao
 
 WORKDIR /home/senzhao
 
-COPY inst/app/*.R .
+COPY inst/app/*.R ./
 
 RUN chown senzhao:senzhao -R /home/senzhao
 
