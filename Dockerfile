@@ -42,10 +42,9 @@ RUN curl -L https://github.com/samtools/htslib/releases/download/${htsversion}/h
     curl -L https://github.com/samtools/bcftools/releases/download/${htsversion}/bcftools-${htsversion}.tar.bz2 | tar xj && \
     (cd bcftools-${htsversion} && ./configure --enable-libgsl --enable-perl-filters --with-htslib=system && make install)
 
-# Using frozen R repo from May 6th 2022 for Ubuntu 20.04 (Focal)
 RUN R -e "install.packages('remotes'); \
-    remotes::install_version('devtools', '2.4.3', repos = 'https://packagemanager.rstudio.com/all/__linux__/focal/2022-05-06+Y3JhbiwyOjQ1MjYyMTU7QzA2NTkwQTM'); \
-    remotes::install_version('shinyWidgets', '0.6.2', repos = 'https://packagemanager.rstudio.com/all/__linux__/focal/2022-05-06+Y3JhbiwyOjQ1MjYyMTU7QzA2NTkwQTM'); \
+    remotes::install_version('devtools', '2.4.3'); \
+    remotes::install_version('shinyWidgets', '0.6.2'); \
     remotes::install_github('lchiffon/wordcloud2@8a12a3b63c975c9d193832ee1a27489cf9ed689f'); \
     remotes::install_github('senzhaocode/FuSViz@8d2f8121f49596f00903b057a0ea9a834a1bf178')"
 RUN rm -rf /tmp/bcftools* && rm -rf /tmp/htslib-* && rm -rf /tmp/samtools-* && rm -rf /tmp/file* && rm -rf /tmp/shinyWidgets*
